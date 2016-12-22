@@ -2,12 +2,12 @@ import React from 'react';
 
 class Btn extends React.Component {
     render() {
-      const { increment, decrement } = this.props;
+      const { to_en_US_Action, to_zh_TW_Action } = this.props;
 
       return (
         <div>
-          <button onClick={increment}> + </button>
-          <button onClick={decrement}> - </button>
+          <button onClick={to_en_US_Action}> en_US </button>
+          <button onClick={to_zh_TW_Action}> zh_TW </button>
         </div>
       )
     }

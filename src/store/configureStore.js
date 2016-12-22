@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux';
 
-import counterReducer from '../reducers/counterReducer';
+import i18nReducer from '../reducers/i18nReducer';
 
 const rootReducer = combineReducers({
-    counterReducer
+    i18nReducer
 })
 
 export default createStore(rootReducer, window.devToolsExtension ? window.devToolsExtension() : undefined);

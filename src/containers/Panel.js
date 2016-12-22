@@ -2,10 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Show from '../components/Show';
 import Btn from '../components/Btn';
 
-import * as counterAction from '../actions/counterAction';
+import * as i18nAction from '../actions/i18nAction';
+import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl';
+import en_US from '../locale/en_US';
+import zh_TW from '../locale/zh_TW';
+import en from 'react-intl/locale-data/en';
+import zh from 'react-intl/locale-data/zh';
+addLocaleData([...en,...zh]);
 
 class Panel extends React.Component {
     constructor() {
@@ -14,15 +19,49 @@ class Panel extends React.Component {
 
     render() {
 
-        const { number, actions } = this.props;
+        const { currentLocale, actions } = this.props;
+        let children;
+        let localeSTR = "en";
+        let messageObj = {en_US};
+
+        console.log(currentLocale);
+
+        switch(currentLocale){
+            case 'en_US':
+            {
+                localeSTR = "en";
+                messageObj = en_US;
+                break;
+            };
+            case 'zh_TW':
+            {
+                localeSTR = "zh";
+                messageObj = zh_TW;
+                break;
+            };
+        };
+
+        console.log(messageObj);
+
+        children = (
+            <IntlProvider locale={localeSTR} messages={messageObj}>
+                <FormattedMessage
+                   id='hello'
+                   description='say hello to David.'
+                   defaultMessage='Hello, David'
+                />
+            </IntlProvider>
+        );
 
         return (
             <div>
-                <Show num={number} />
-                <Btn 
-                    increment={actions.incrementAction} 
-                    decrement={actions.decrementAction}
-                />
+                <div> {children} </div>
+                <div>
+                    <Btn 
+                       to_en_US_Action={actions.to_en_US_Action} 
+                       to_zh_TW_Action={actions.to_zh_TW_Action}
+                    />
+                </div>
             </div>
         )
     }
@@ -30,13 +69,13 @@ class Panel extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        number: state.counterReducer.number
+        currentLocale: state.i18nReducer.locale
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators(counterAction, dispatch)
+        actions: bindActionCreators(i18nAction, dispatch)
     }
 }
 
