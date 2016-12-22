@@ -6,9 +6,9 @@ class Btn extends React.Component {
 
       return (
         <div>
-          <button onClick={to_en_US_Action}> en_US </button>
-          <button onClick={to_zh_TW_Action}> zh_TW </button>
-          <button onClick={to_zh_Action}> zh </button>
+          <button onClick={to_en_US_Action}> English </button>
+          <button onClick={to_zh_TW_Action}> 繁體中文 </button>
+          <button onClick={to_zh_Action}> 简体中文 </button>
         </div>
       )
     }
