@@ -11,3 +11,10 @@ export const to_zh_TW_Action = () => {
         locale: 'zh_TW'
     }
 }
+
+export const to_zh_Action = () => {
+    return {
+        type: 'CHANGE_LOCALE',
+        locale: 'zh'
+    }
+}
