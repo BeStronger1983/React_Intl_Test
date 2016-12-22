@@ -1,8 +1,13 @@
 import React from 'react';
 
-import { FormattedMessage, FormattedDate, FormattedTime } from 'react-intl';
+import { FormattedMessage, FormattedDate, FormattedTime, FormattedRelative } from 'react-intl';
 
 class Show extends React.Component {
+	constructor() {
+        super();
+        this.currentDate = new Date()
+    }
+
 	render() {
 		return (
 			<div>
@@ -15,16 +20,17 @@ class Show extends React.Component {
 				</div>
 				<div>
 					<FormattedDate
-						value={new Date()}
+						value={this.currentDate}
 						year='numeric'
 						month='long'
 						day='2-digit'
 					/>
 				</div>
 				<div>
-					<FormattedTime
-						value={new Date()}
-					/>
+					<FormattedTime value={this.currentDate}/>
+				</div>
+				<div>
+					<FormattedRelative value={this.currentDate} updateInterval={1000}/>
 				</div>
 			</div>
 		)
