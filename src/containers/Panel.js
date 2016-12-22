@@ -9,7 +9,7 @@ import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl';
 import en_US from '../locale/en_US';
 import zh_TW from '../locale/zh_TW';
 import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh';
+import zh from 'react-intl/locale-data/zh'; // 包括繁體中文(zh-Hant)
 addLocaleData([...en,...zh]);
 
 class Panel extends React.Component {
@@ -35,7 +35,7 @@ class Panel extends React.Component {
             };
             case 'zh_TW':
             {
-                localeSTR = "zh";
+                localeSTR = "zh-Hant";
                 messageObj = zh_TW;
                 break;
             };
