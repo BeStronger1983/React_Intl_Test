@@ -5,57 +5,22 @@ import { bindActionCreators } from 'redux';
 import Btn from '../components/Btn';
 
 import * as i18nAction from '../actions/i18nAction';
-import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl';
-import en_US from '../locale/en_US';
-import zh_TW from '../locale/zh_TW';
-import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh';
-addLocaleData([...en,...zh]);
+import { IntlProvider, FormattedMessage } from 'react-intl';
 
 class Panel extends React.Component {
-    constructor() {
-        super();
-    }
-
     render() {
-
-        const { currentLocale, actions } = this.props;
-        let children;
-        let localeSTR = "en";
-        let messageObj = {en_US};
-
-        console.log(currentLocale);
-
-        switch(currentLocale){
-            case 'en_US':
-            {
-                localeSTR = "en";
-                messageObj = en_US;
-                break;
-            };
-            case 'zh_TW':
-            {
-                localeSTR = "zh";
-                messageObj = zh_TW;
-                break;
-            };
-        };
-
-        console.log(messageObj);
-
-        children = (
-            <IntlProvider locale={localeSTR} messages={messageObj}>
-                <FormattedMessage
-                   id='hello'
-                   description='say hello to David.'
-                   defaultMessage='Hello, David'
-                />
-            </IntlProvider>
-        );
-
+        const { i18n, actions } = this.props;
         return (
             <div>
-                <div> {children} </div>
+                <div>
+                    <IntlProvider {...i18n}>
+                        <FormattedMessage
+                           id='hello'
+                           description='say hello to David.'
+                           defaultMessage='Hello, David'
+                        />
+                    </IntlProvider>
+                </div>
                 <div>
                     <Btn 
                        to_en_US_Action={actions.to_en_US_Action} 
@@ -69,7 +34,7 @@ class Panel extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentLocale: state.i18nReducer.locale
+        i18n: state.i18nReducer
     }
 }
 
