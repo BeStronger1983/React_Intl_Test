@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import Show from '../components/Show';
 import Btn from '../components/Btn';
 
 import * as i18nAction from '../actions/i18nAction';
-import { addLocaleData, IntlProvider, FormattedMessage } from 'react-intl';
+import { addLocaleData, IntlProvider} from 'react-intl';
 import en_US from '../locale/en_US';
 import zh_TW from '../locale/zh_TW';
 import en from 'react-intl/locale-data/en';
@@ -24,8 +25,6 @@ class Panel extends React.Component {
         let localeSTR = "en";
         let messageObj = {en_US};
 
-        console.log(currentLocale);
-
         switch(currentLocale){
             case 'en_US':
             {
@@ -41,15 +40,9 @@ class Panel extends React.Component {
             };
         };
 
-        console.log(messageObj);
-
         children = (
             <IntlProvider locale={localeSTR} messages={messageObj}>
-                <FormattedMessage
-                   id='hello'
-                   description='say hello to David.'
-                   defaultMessage='Hello, David'
-                />
+                <Show />
             </IntlProvider>
         );
 
