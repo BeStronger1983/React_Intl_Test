@@ -5,7 +5,15 @@ import { FormattedMessage, FormattedDate, FormattedTime, FormattedRelative } fro
 class Show extends React.Component {
 	constructor() {
         super();
-        this.currentDate = new Date()
+        this.currentDate = new Date();
+        this.targetDate = new Date(
+        	this.currentDate.getFullYear(),
+        	this.currentDate.getMonth(),
+        	this.currentDate.getDate(),
+        	this.currentDate.getHours(),
+        	this.currentDate.getMinutes(),
+        	this.currentDate.getSeconds() + 30
+        );
     }
 
 	render() {
@@ -30,7 +38,7 @@ class Show extends React.Component {
 					<FormattedTime value={this.currentDate}/>
 				</div>
 				<div>
-					<FormattedRelative value={this.currentDate} updateInterval={1000}/>
+					<FormattedRelative value={this.targetDate} initialNow={this.currentDate} updateInterval={1000}/>
 				</div>
 			</div>
 		)
