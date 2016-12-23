@@ -1,7 +1,5 @@
-# React ES6 start kit
+# react-intl test
 
-help everyone to start first React + ES5  front end enviroment with webpack and babel
+practice https://github.com/yahoo/react-intl
 
-`npm run dev` run webpack dev server
-
-`npm run build` build dist file
+`npm start` run webpack dev server
