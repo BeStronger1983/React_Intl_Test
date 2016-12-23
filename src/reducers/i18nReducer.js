@@ -1,5 +1,4 @@
 const initialState = {
-    locale: "zh_TW"
 }
 
 const i18nReducer = (state = initialState, action) => {

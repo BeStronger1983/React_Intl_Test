@@ -14,6 +14,8 @@ import en from 'react-intl/locale-data/en';
 addLocaleData([...en,...zh]);
 import zh from 'react-intl/locale-data/zh'; // 包括繁體中文(zh-Hant)、簡體中文(zh)
 
+import cookie from 'react-cookie';
+
 class Panel extends React.Component {
     constructor() {
         super();
@@ -23,17 +25,18 @@ class Panel extends React.Component {
 
         const { currentLocale, actions } = this.props;
         let children;
-        let localeSTR = "en";
-        let messageObj = {en_US};
+        let localeSTR = "zh";
+        let messageObj = {zh_S};
+        let langType = currentLocale || cookie.load('lang');
 
-        switch(currentLocale){
-            case 'en_US':
+        switch(langType){
+            case 'en_us':
             {
                 localeSTR = "en";
                 messageObj = en_US;
                 break;
             };
-            case 'zh_TW':
+            case 'zh_tw':
             {
                 localeSTR = "zh-Hant";
                 messageObj = zh_TW;
@@ -46,6 +49,8 @@ class Panel extends React.Component {
                 break;
             };
         };
+
+        cookie.save('lang', currentLocale);
 
         children = (
             <IntlProvider locale={localeSTR} messages={messageObj}>
