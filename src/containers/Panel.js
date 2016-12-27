@@ -6,62 +6,14 @@ import Show from '../components/Show';
 import Btn from '../components/Btn';
 
 import * as i18nAction from '../actions/i18nAction';
-import { addLocaleData, IntlProvider} from 'react-intl';
-import en_US from '../locale/en_US'; // 英文 美國
-import zh_TW from '../locale/zh_TW'; // 繁體中文
-import zh_S from '../locale/zh_S'; // 簡體中文
-import en from 'react-intl/locale-data/en';
-import zh from 'react-intl/locale-data/zh'; // 包括繁體中文(zh-Hant)、簡體中文(zh)
-
-addLocaleData([...en,...zh]);
-
-import cookie from 'react-cookie';
 
 class Panel extends React.Component {
-    constructor() {
-        super();
-    }
-
     render() {
-
-        const { currentLocale, actions } = this.props;
-        let children;
-        let localeSTR = "zh";
-        let messageObj = {zh_S};
-        let langType = currentLocale || cookie.load('lang');
-
-        switch(langType){
-            case 'en_US':
-            {
-                localeSTR = "en";
-                messageObj = en_US;
-                break;
-            };
-            case 'zh_TW':
-            {
-                localeSTR = "zh-Hant";
-                messageObj = zh_TW;
-                break;
-            };
-            case 'zh':
-            {
-                localeSTR = "zh";
-                messageObj = zh_S;
-                break;
-            };
-        };
-
-        cookie.save('lang', currentLocale);
-
-        children = (
-            <IntlProvider locale={localeSTR} messages={messageObj}>
-                <Show />
-            </IntlProvider>
-        );
+        const { actions } = this.props;
 
         return (
             <div>
-                <div> {children} </div>
+                <div> <Show /> </div>
                 <div>
                     <Btn 
                        to_en_US_Action={actions.to_en_US_Action} 
@@ -76,7 +28,6 @@ class Panel extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        currentLocale: state.i18nReducer.locale
     }
 }
 
@@ -86,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Panel);
+export default connect(null, mapDispatchToProps)(Panel);
