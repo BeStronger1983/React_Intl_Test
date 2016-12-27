@@ -19,7 +19,6 @@ class I18n extends Component {
 
 	render() {
 		const { currentLocale } = this.props;
-	    let children;
 	    let localeSTR = "zh";
 	    let messageObj = {zh_S};
 	    let langType = currentLocale || cookie.load('lang') || 'zh';
@@ -47,16 +46,12 @@ class I18n extends Component {
 
 	    cookie.save('lang', langType);
 
-	    children = (
-	        <IntlProvider key={currentLocale} locale={localeSTR} messages={messageObj}>
-	            <Panel />
-	        </IntlProvider>
-	    );
-
 	    return (
-            <div>
-            	{children}
-            </div>
+          <div>
+          	<IntlProvider key={currentLocale} locale={localeSTR} messages={messageObj}>
+		            <Panel />
+		        </IntlProvider>
+          </div>
         )
 	}
 }
