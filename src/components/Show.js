@@ -39,6 +39,14 @@ class Show extends React.Component {
 						defaultMessage='Hello, David'
 					/>
 				</div>
+        <div>
+          <FormattedMessage
+            id='superHello'
+            values = {{
+              someone: 'ponpon'
+            }}
+          />
+        </div>
 				<div>
 					<FormattedDate
 						value={this.currentDate}
